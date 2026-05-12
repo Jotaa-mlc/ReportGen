@@ -3,7 +3,7 @@ import re
 import sqlite3
 import subprocess
 import pandas as pd
-from config.settings import (
+from core.config.settings import (
     MDB_PATH,
     SCHEMA_FILE,
     SQLITE_DB,

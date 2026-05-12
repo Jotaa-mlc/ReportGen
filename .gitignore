@@ -1,7 +1,7 @@
 venv/
 xlsx/
 tabelas_csv/
-input/
+inputs/
 sqlite/
 __pycache__/
 .env
