@@ -15,7 +15,7 @@ from core.config.settings import (
 # FLAGS
 # =========================
 
-RECREATE_SCHEMA = False
+RECREATE_SCHEMA = True
 
 # tabelas que terão limpeza texto
 TABLES_TO_CLEAN = [

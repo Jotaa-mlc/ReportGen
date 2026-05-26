@@ -84,7 +84,10 @@ def format_report(worksheet: Worksheet, formats: dict, df: DataFrame, context: d
         len(df),
         variacao_orcamento_col,
         {
-            "type": "3_color_scale"
+            "type": "3_color_scale",
+            'min_color': "#63BE7B",
+            'mid_color': "#FFEB84",
+            'max_color': "#F8696B"
         }
     )
     
@@ -94,7 +97,7 @@ def format_report(worksheet: Worksheet, formats: dict, df: DataFrame, context: d
 
     worksheet.freeze_panes(
         1,
-        2
+        6
     )
 
     # =========================
@@ -105,5 +108,5 @@ def format_report(worksheet: Worksheet, formats: dict, df: DataFrame, context: d
         0,
         0,
         len(df),
-        len(df.columns) - 1
+        len(column_map) - 1
     )

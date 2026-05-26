@@ -2,16 +2,17 @@ import datetime
 
 import pandas as pd
 
+from pathlib import Path
+
 from core.config.settings import (
     SQLITE_DB,
-    ENCODING,
-    INPUT_DIR
+    INPUT_DIR,
+    ENCODING
 )
 
 from report.compras.settings import (
     MESES_VENDAS,
-    XLSX_OUTPUT_FILE,
-    INPUT_FILE
+    XLSX_OUTPUT_FILE
 )
 
 from core.db.connection import get_connection
@@ -33,17 +34,15 @@ from report.compras.export import export_report
 # INPUT
 # =========================
 
-def load_cod_barras():
-
-    input_file = (
-        INPUT_DIR
-        / INPUT_FILE
-    )
+def load_cod_barras(input_file_name):
+    input_file = Path(INPUT_DIR / input_file_name)
+    if not input_file.is_file():
+        raise FileNotFoundError("Input file not found")
 
     return pd.read_csv(
         input_file,
         encoding=ENCODING
-    )['cod_barra'].tolist()
+    )['codigo_barra'].tolist()
 
 # =========================
 # DATAS
@@ -66,9 +65,9 @@ def build_period():
 # MAIN
 # =========================
 
-def main():
-
-    cod_barras = load_cod_barras()
+def main(input_file_name):
+    
+    cod_barras = load_cod_barras(input_file_name)
 
     data_inicio, data_fim = build_period()
 

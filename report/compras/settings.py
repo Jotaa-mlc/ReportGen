@@ -7,7 +7,6 @@ from report.compras import formulas
 MESES_VENDAS = 12
 MESES_SUGESTAO = 3
 XLSX_OUTPUT_FILE = 'Relatório de Compras.xlsx'
-INPUT_FILE = 'produtos_compras.csv'
 
 BASE_COLUMNS = {
 
@@ -121,10 +120,11 @@ EXTRA_COLUMNS = {
 
     "input_sugestao": {
         "title": "",
-        "type": "default_value",
+        "type": ["default_value", "formula"],
         "format": "integer",
         "width": 12,
-        "row_input": 0,
+        "formula": formulas.default_input_sugestao,
+        "row_input_default": 0,
         "default": MESES_SUGESTAO
     },
 
@@ -133,7 +133,7 @@ EXTRA_COLUMNS = {
         "type": "default_value",
         "format": "header",
         "width": 22,
-        "row_input": 0,
+        "row_input_default": 0,
         "default": "◀ Meses para Sugestão"
         
     }

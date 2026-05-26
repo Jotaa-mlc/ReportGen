@@ -51,10 +51,11 @@ def estoque_mes_formula(ctx):
     media_col = column_map["media_vendas"]
 
     return (
-        f'='
+        f'=IFERROR('
         f'{col(estoque_col)}{row}'
         f'/'
         f'{col(media_col)}{row}'
+        f',0)'
     )
 
 # =====================
@@ -63,8 +64,10 @@ def estoque_mes_formula(ctx):
 
 def sugestao_formula(ctx):
 
+    input_row = 1
+    arround_to = 5
     row = ctx["excel_row"]
-
+    
     cols = ctx["column_map"]
 
     input_col = cols["input_sugestao"]
@@ -74,11 +77,13 @@ def sugestao_formula(ctx):
     estoque_col = cols["estoque"]
 
     return (
-        f'=ROUND(('
-        f'{col(input_col)}$1*'
+        f'=IF(({col(input_col)}${input_row}*'
+        f'{col(media_col)}{row}) - {col(estoque_col)}{row} >= {arround_to}/2,'
+        f'MROUND(({col(input_col)}${input_row}*'
         f'{col(media_col)}{row}-'
         f'{col(estoque_col)}{row}'
-        f')/5,0)*5'
+        f'),{arround_to})'
+        f',"")'
     )
 
 # =====================
@@ -98,11 +103,12 @@ def estoque_sugestao_formula(ctx):
     media_col = cols["media_vendas"]
 
     return (
-        f'=('
-        f'{col(estoque_col)}{row}+'
+        f'=IF({col(sugestao_col)}{row}<>"",'
+        f'({col(estoque_col)}{row}+'
         f'{col(sugestao_col)}{row}'
         f')/'
         f'{col(media_col)}{row}'
+        f',"")'
     )
 
 # =====================
@@ -122,11 +128,12 @@ def estoque_compra_formula(ctx):
     media_col = cols["media_vendas"]
 
     return (
-        f'=('
-        f'{col(estoque_col)}{row}+'
+        f'=IF({col(input_col)}{row}<>"",'
+        f'({col(estoque_col)}{row}+'
         f'{col(input_col)}{row}'
         f')/'
         f'{col(media_col)}{row}'
+        f',"")'
     )
 
 # =====================
@@ -145,7 +152,7 @@ def qte_orcamento_formula(ctx):
         f'{col(codigo_col)}{row},'
         f'\'Orçamento\'!A:B,'
         f'2,0'
-        f'),0)'
+        f'),"")'
     )
 
 # =====================
@@ -170,5 +177,11 @@ def variacao_orcamento_formula(ctx):
         f'3,0'
         f')/'
         f'{col(compra_col)}{row}'
-        f')-1,0)'
+        f')-1,"")'
     )
+    
+def default_input_sugestao(ctx):
+    row = ctx["excel_row"]
+    qte_orcamento_col = ctx["column_map"]["qte_orcamento"]
+
+    return f'={col(qte_orcamento_col)}{row}'

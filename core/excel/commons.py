@@ -80,7 +80,6 @@ def write_columns_from_config(
     dataframe: pd.DataFrame,
     formats: dict,
     context: dict,
-    start_col: int = 0
 ): 
 
     column_map = build_column_map(context["columns"])
@@ -89,12 +88,10 @@ def write_columns_from_config(
     # HEADERS
     # ==================================================
 
-    for idx, (key, config) in enumerate(
+    for col_num, (key, config) in enumerate(
         context["columns"].items()
     ):
-
-        col_num = start_col + idx
-
+        
         column_map[key] = col_num
 
         worksheet.write(
@@ -152,7 +149,7 @@ def write_columns_from_config(
             # FORMULA
             # ==========================================
 
-            if col_type == "formula":
+            if "formula" in col_type:
 
                 formula = config["formula"](
                     row_context
@@ -170,7 +167,7 @@ def write_columns_from_config(
             # SPARKLINE
             # ==========================================
 
-            elif col_type == "sparkline":
+            if "sparkline" in col_type:
 
                 spark_cfg = config["formula"](
                     row_context
@@ -186,13 +183,13 @@ def write_columns_from_config(
             # DEFAULT VALUES
             # ==========================================
             
-            elif col_type == "default_value":
+            if "default_value" in col_type:
 
                 value = config.get("default", "")
-                row_input = config.get("row_input")
+                row = config.get("row_input_default")
 
                 worksheet.write(
-                    row_input,
+                    row,
                     col_num,
                     value,
                     fmt
