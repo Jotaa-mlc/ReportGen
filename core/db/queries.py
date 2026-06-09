@@ -9,5 +9,5 @@ SELECT
 
 FROM Produtos pr
 
-WHERE pr.Cod_barra IN ({placeholders})
+WHERE pr.Cod_barra IN ({placeholders}) AND pr.Sit_produto = 'Ativo' 
 """

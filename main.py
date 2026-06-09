@@ -7,8 +7,8 @@ from report.compras.main import (
 from import_from_MDB import main as import_from_MDB
 
 REPORTS = {
+    "updt_db": import_from_MDB,
     "compras": compras_report,
-    "import_db": import_from_MDB,
 }
 
 

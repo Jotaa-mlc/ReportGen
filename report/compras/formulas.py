@@ -183,5 +183,7 @@ def variacao_orcamento_formula(ctx):
 def default_input_sugestao(ctx):
     row = ctx["excel_row"]
     qte_orcamento_col = ctx["column_map"]["qte_orcamento"]
+    qte_sugestao_col = ctx["column_map"]["sugestao"]
+    
 
-    return f'={col(qte_orcamento_col)}{row}'
+    return f'=IF({col(qte_orcamento_col)}{row}="",{col(qte_sugestao_col)}{row},{col(qte_orcamento_col)}{row})'
