@@ -4,31 +4,31 @@ import pandas as pd
 
 from pathlib import Path
 
-from core.config.settings import (
+from backend.core.config.settings import (
     SQLITE_DB,
     INPUT_DIR,
     ENCODING
 )
 
-from report.compras.settings import (
+from backend.report.compras.settings import (
     MESES_VENDAS,
     XLSX_OUTPUT_FILE
 )
 
-from core.db.connection import get_connection
+from backend.core.db.connection import get_connection
 
 
-from report.compras.builder import (
+from backend.report.compras.builder import (
     build_vendas_pivot,
     merge_report_data
 )
 
-from report.compras.queries import (
+from backend.report.compras.queries import (
     load_produtos,
     load_vendas
 )
 
-from report.compras.export import export_report
+from backend.report.compras.export import export_report
 
 # =========================
 # INPUT

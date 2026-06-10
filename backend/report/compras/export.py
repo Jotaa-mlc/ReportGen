@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from pandas import DataFrame
-from core.excel.commons import create_writer, export_dataframe, write_columns_from_config
-from core.excel.formats import build_formats
-from report.compras.settings import BASE_COLUMNS, EXTRA_COLUMNS, ORC_COLUMNS, CUSTOM_FORMATS
-from report.compras.format import format_report
+from backend.core.excel.commons import create_writer, export_dataframe, write_columns_from_config
+from backend.core.excel.formats import build_formats
+from backend.report.compras.settings import BASE_COLUMNS, EXTRA_COLUMNS, ORC_COLUMNS, CUSTOM_FORMATS
+from backend.report.compras.format import format_report
 
 
 def build_report_columns(base_columns, dataframe, extra_columns):

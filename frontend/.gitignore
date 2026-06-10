@@ -1,12 +1,3 @@
-venv/
-xlsx/
-tabelas_csv/
-inputs/
-sqlite/
-__pycache__/
-.env
-
-
 # Logs
 logs
 *.log
