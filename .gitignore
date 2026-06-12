@@ -1,8 +1,5 @@
 venv/
-xlsx/
-tabelas_csv/
-inputs/
-sqlite/
+untracked/
 __pycache__/
 .env
 

@@ -1,4 +1,4 @@
-from backend.report.compras import formulas
+from report.compras import formulas
 
 # =========================
 # CONFIG

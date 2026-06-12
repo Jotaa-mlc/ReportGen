@@ -1,5 +1,5 @@
 import pandas as pd
-from backend.core.db.queries import PRODUTOS_DCCVE_QUERY
+from core.db.queries import PRODUTOS_DCCVE_QUERY
 
 VENDAS_QUERY = """
 SELECT

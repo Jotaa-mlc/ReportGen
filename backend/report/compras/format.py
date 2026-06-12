@@ -1,7 +1,7 @@
 from xlsxwriter.workbook import Worksheet
 from pandas import DataFrame
 from xlsxwriter.utility import xl_col_to_name as col 
-from backend.core.excel.commons import build_column_map
+from core.excel.commons import build_column_map
 
 
 

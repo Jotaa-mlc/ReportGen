@@ -1,11 +1,11 @@
 import pandas as pd
 from pathlib import Path
-from backend.core.config.settings import  XLSX_DIR
+from core.config.settings import  OUTPUT_DIR
 from xlsxwriter.workbook import Worksheet
 
 def create_writer(output_file: Path) -> pd.ExcelWriter:
     return pd.ExcelWriter(
-        XLSX_DIR / output_file,
+        OUTPUT_DIR / output_file,
         engine='xlsxwriter'
     )
 

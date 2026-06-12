@@ -10,7 +10,7 @@ MDB_PATH = Path(os.getenv("MDB_PATH"))
 BASE_DIR = Path(os.getenv("BASE_DIR"))
 SCHEMA_FILE = Path(BASE_DIR / os.getenv("SCHEMA_FILE"))
 SQLITE_DB = Path(BASE_DIR / os.getenv("SQLITE_DB"))
-XLSX_DIR = Path(BASE_DIR / os.getenv("XLSX_DIR"))
+OUTPUT_DIR = Path(BASE_DIR / os.getenv("OUTPUT_DIR"))
 INPUT_DIR = Path(BASE_DIR / os.getenv("INPUT_DIR"))
 TABLE_DIR = Path(BASE_DIR / os.getenv("TABLE_DIR"))
 
@@ -21,7 +21,7 @@ TABLE_DIR.mkdir(
     exist_ok=True
 )
 
-XLSX_DIR.mkdir(
+OUTPUT_DIR.mkdir(
     parents=True,
     exist_ok=True
 )
