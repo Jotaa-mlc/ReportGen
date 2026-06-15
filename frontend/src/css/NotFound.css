@@ -1,0 +1,35 @@
+#not-found-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f4f4f4;
+    justify-content: center;
+    align-items: center;
+}
+
+#not-found-page h1 {
+    font-size: 3em;
+    color: #eabc00;
+    margin-bottom: 20px;
+}
+
+#not-found-page h2 {
+    color: red;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#not-found-page p {
+    font-size: 1.2em;
+    color: #163f5f;
+    margin-bottom: 30px;
+}
+
+#not-found-page a {
+    color: #205781;
+    text-decoration: none;
+    font-weight: bold;
+}
