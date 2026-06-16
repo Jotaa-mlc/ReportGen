@@ -6,8 +6,9 @@
 
 body {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #898989;
+  background-color: gray;
 }
+
 .app-container {
   display: flex;
   flex-direction: column;

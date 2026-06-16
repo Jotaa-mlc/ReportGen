@@ -3,7 +3,7 @@ import '../css/Footer.css';
 function Footer() {
     return (
         <footer>
-            <span>© 2024 Hidraucenter. Todos os direitos reservados.</span>
+            <span>© 2026 JP Hidraucenter Nordeste. Todos os direitos reservados.</span>
         </footer>
     );
 }

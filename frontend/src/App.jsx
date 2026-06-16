@@ -6,6 +6,7 @@ import Reports from './pages/Reports.jsx';
 import Compras from './pages/reports/Compras.jsx';
 import FamiliasProdutos from './pages/reports/FamiliasProdutos.jsx';
 import FornecedorProdutos from './pages/reports/FornecedorProdutos.jsx';
+import FornecedorFamilias from './pages/reports/FornecedorFamilias.jsx';
 
 import './css/App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -23,6 +24,7 @@ function App() {
               <Route path="compras" element={<Compras />} />
               <Route path="familias-produtos" element={<FamiliasProdutos />} />
               <Route path="fornecedor-produtos" element={<FornecedorProdutos />} />
+              <Route path="fornecedor-familias" element={<FornecedorFamilias />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
