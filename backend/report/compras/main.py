@@ -1,14 +1,13 @@
 import datetime
-
+from pathlib import Path
 import pandas as pd
 
-from pathlib import Path
-
 from core.config.settings import (
-    SQLITE_DB,
+    ERP_SQLITE_DB,
     INPUT_DIR,
-    ENCODING
-)
+    ENCODING,
+    OUTPUT_DIR
+) 
 
 from report.compras.settings import (
     MESES_VENDAS,
@@ -71,7 +70,7 @@ def main(input_file_name):
 
     data_inicio, data_fim = build_period()
 
-    conn = get_connection(SQLITE_DB)
+    conn = get_connection(ERP_SQLITE_DB)
 
     produtos_df = load_produtos(
         conn,
@@ -94,12 +93,13 @@ def main(input_file_name):
         pivot_df
     )
 
-    full_output_file = datetime.datetime.now().strftime('%Y-%m-%d %Hh %Mm %Ss') + ' ' + XLSX_OUTPUT_FILE
-    export_report(final_df, full_output_file)
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%Hh%Mm%Ss')
+    output_filename = f"{timestamp} {XLSX_OUTPUT_FILE}"
+    export_report(final_df, OUTPUT_DIR / output_filename)
 
     conn.close()
 
 
 if __name__ == '__main__':
 
-    main()
+    main(input_file_name='multi.csv')

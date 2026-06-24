@@ -1,10 +1,10 @@
-# ReportGen 📊
+# Report Gen 📊
 
 Um sistema de geração de relatórios interativos dividido em uma API robusta (Python) e uma interface dinâmica (React).
 
 ## 🛠️ Tecnologias Utilizadas
-* **Backend:** Python, FastAPI, Pandas, SQLite (via pyodbc/sqlite3).
-* **Frontend:** React, Vite, React Router DOM, CSS nativo.
+* **Back end:** Python, Fast-API, Pandas, SQLite (via pyodbc / sqlite3).
+* **Front end:** React, Vite, React Router DOM, CSS nativo.
 
 ## 🚀 O que o sistema já faz (Features Atuais)
 * **Relatório de Compras:** Cruza dados de produtos com o histórico de entradas e vendas, gera uma tabela dinâmica (Pivot) e exporta abas customizadas no Excel.
@@ -12,7 +12,7 @@ Um sistema de geração de relatórios interativos dividido em uma API robusta (
 
 ## ⚙️ Como rodar o projeto localmente
 
-### 1. Rodando a API (Backend)
+### 1. Rodando a API (Back end)
 \`\`\`bash
 cd backend
 python -m venv venv
@@ -22,7 +22,7 @@ uvicorn main_api:app --reload
 \`\`\`
 *A API ficará disponível em http://localhost:8000*
 
-### 2. Rodando a Interface (Frontend)
+### 2. Rodando a Interface (Front end)
 \`\`\`bash
 cd frontend
 npm install

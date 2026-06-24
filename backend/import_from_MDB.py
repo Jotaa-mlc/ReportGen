@@ -4,10 +4,10 @@ import sqlite3
 import subprocess
 import pandas as pd
 from core.config.settings import (
-    MDB_PATH,
-    SCHEMA_FILE,
-    SQLITE_DB,
-    TABLE_DIR,
+    BASE_DIR,
+    ERP_MDB,
+    ERP_SCHEMA,
+    ERP_SQLITE_DB,
     ENCODING,
 )
 
@@ -16,6 +16,9 @@ from core.config.settings import (
 # =========================
 
 RECREATE_SCHEMA = True
+
+TABLE_DIR = os.path.join(BASE_DIR, "untracked/sqlite/tabelas_csv")
+
 
 # tabelas que terão limpeza texto
 TABLES_TO_CLEAN = [
@@ -31,7 +34,7 @@ def run(cmd):
 
 
 def get_tables():
-    out = run(["mdb-tables", "-1", MDB_PATH])
+    out = run(["mdb-tables", "-1", ERP_MDB])
     return [t.strip() for t in out.splitlines() if t.strip()]
 
 
@@ -41,12 +44,12 @@ def get_tables():
         
 def generate_schema():
     print("Gerando schema...")
-    schema = run(["mdb-schema", MDB_PATH, "sqlite"])
-    with open(SCHEMA_FILE, "w") as f:
+    schema = run(["mdb-schema", ERP_MDB, "sqlite"])
+    with open(ERP_SCHEMA, "w") as f:
         f.write(schema)
 
 def ensure_schema():
-    if RECREATE_SCHEMA or not os.path.exists(SCHEMA_FILE):
+    if RECREATE_SCHEMA or not os.path.exists(ERP_SCHEMA):
         generate_schema()
     else:
         print("[OK] usando schema existente")
@@ -111,7 +114,7 @@ def map_types(sql_types):
 def export_table(table):
     csv_path = os.path.join(TABLE_DIR, f"{table}.csv")
     with open(csv_path, "w") as f:
-        subprocess.run(["mdb-export", MDB_PATH, table], stdout=f)
+        subprocess.run(["mdb-export", ERP_MDB, table], stdout=f)
     return csv_path
 
 def export_all_tables(schema):
@@ -255,7 +258,7 @@ def clean_text_columns_in_tables(
     return tables
 
 def validate(table, conn):
-    mdb_count = run(["mdb-count", MDB_PATH, table]).strip()
+    mdb_count = run(["mdb-count", ERP_MDB, table]).strip()
 
     cur = conn.cursor()
     cur.execute(f'SELECT COUNT(*) FROM "{table}"')
@@ -277,7 +280,7 @@ def check_integrity(conn):
 
 def main():
     ensure_schema()
-    schema = parse_schema(SCHEMA_FILE)
+    schema = parse_schema(ERP_SCHEMA)
     print(f"\nTabelas encontradas: {len(schema)}")
 
     exported_csvs = export_all_tables(schema)
@@ -294,7 +297,7 @@ def main():
 
     export_to_sqlite(
         tables,
-        SQLITE_DB
+        ERP_SQLITE_DB
     )
     print("\n✔️ Concluído!")
 

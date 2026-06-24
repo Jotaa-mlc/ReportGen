@@ -5,21 +5,23 @@ import os
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 load_dotenv(ROOT_DIR / ".env")
 
+def env_path(key: str) -> Path:
+    value = os.getenv(key)
+    if value is None:
+        raise ValueError(f"Environment variable {key} is required")
+    return Path(value)
 
-MDB_PATH = Path(os.getenv("MDB_PATH"))
-BASE_DIR = Path(os.getenv("BASE_DIR"))
-SCHEMA_FILE = Path(BASE_DIR / os.getenv("SCHEMA_FILE"))
-SQLITE_DB = Path(BASE_DIR / os.getenv("SQLITE_DB"))
-OUTPUT_DIR = Path(BASE_DIR / os.getenv("OUTPUT_DIR"))
-INPUT_DIR = Path(BASE_DIR / os.getenv("INPUT_DIR"))
-TABLE_DIR = Path(BASE_DIR / os.getenv("TABLE_DIR"))
+
+BASE_DIR = env_path("BASE_DIR")
+ERP_MDB = BASE_DIR / env_path("ERP_MDB")
+ERP_SCHEMA = BASE_DIR / env_path("ERP_SCHEMA")
+ERP_SQLITE_DB = BASE_DIR / env_path("ERP_SQLITE_DB")
+SQLITE_DB = BASE_DIR / env_path("SQLITE_DB")
+SQLITE_SCHEMA = BASE_DIR / env_path("SQLITE_SCHEMA")
+OUTPUT_DIR = BASE_DIR / env_path("OUTPUT_DIR")
+INPUT_DIR = BASE_DIR / env_path("INPUT_DIR")
 
 ENCODING = os.getenv("ENCODING")
-
-TABLE_DIR.mkdir(
-    parents=True,
-    exist_ok=True
-)
 
 OUTPUT_DIR.mkdir(
     parents=True,

@@ -8,9 +8,9 @@ import datetime
 # Importando o seu framework
 from core.config.settings import SQLITE_DB
 from core.db.connection import get_connection
-# from report.familias_produtos.queries import load_entradas_fornecedores
-# from report.familias_produtos.builder import build_familias_df
-# from report.familias_produtos.export import export_familias_report
+# from reports.familias_produtos.queries import load_entradas_fornecedores
+# from reports.familias_produtos.builder import build_familias_df
+# from reports.familias_produtos.export import export_familias_report
 
 app = FastAPI(title="ReportGen API")
 
