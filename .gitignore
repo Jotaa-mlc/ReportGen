@@ -1,31 +1,42 @@
-venv/
-untracked/
-__pycache__/
+# =========================
+# Bancos de Dados e Volumes
+# =========================
+/backend/data/
+*.db
+*.sqlite
+
+# =========================
+# Dados do ERP e Temporários
+# =========================
+*.mdb
+*.accdb
+
+# =========================
+# Dependências e Ambientes
+# =========================
 .env
+.venv/
+venv/
+node_modules/
 
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# =========================
+# Diretórios do editor
+# =========================
+.vscode/
 *.code-workspace
-.vscode/*
-!.vscode/extensions.json
-.idea
+
+# =========================
+# Builds de Produção (React)
+# =========================
+/frontend/dist/
+/frontend/build/
+
+# =========================
+# Logs e Cache (Python/Sist.)
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.log
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?

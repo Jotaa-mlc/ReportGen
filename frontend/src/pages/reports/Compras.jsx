@@ -10,9 +10,9 @@ function Compras() {
 
     // 2. Adicionado 'apiData' em cada linha para armazenar o retorno da API
     const [tableData, setTableData] = useState([
-        { id: 1, codigo_barra: '', qte: '', apiData: {} },
-        { id: 2, codigo_barra: '', qte: '', apiData: {} },
-        { id: 3, codigo_barra: '', qte: '', apiData: {} }
+        { id: 1, cod_barra: '', qte: '', apiData: {} },
+        { id: 2, cod_barra: '', qte: '', apiData: {} },
+        { id: 3, cod_barra: '', qte: '', apiData: {} }
     ]);
 
     const [startDate, setStartDate] = useState('');
@@ -106,9 +106,9 @@ function Compras() {
                                     <td className="sticky-col col-1">
                                         <input
                                             type="text"
-                                            name="codigo_barra"
+                                            name="cod_barra"
                                             className="form-control form-control-sm"
-                                            value={row.codigo_barra}
+                                            value={row.cod_barra}
                                             onChange={(e) => handleChangeItem(row.id, e)}
                                             placeholder="Digite..."
                                         />

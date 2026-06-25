@@ -4,9 +4,8 @@ import sqlite3
 import subprocess
 import pandas as pd
 from core.config.settings import (
-    BASE_DIR,
+    ROOT_DIR,
     ERP_MDB,
-    ERP_SCHEMA,
     ERP_SQLITE_DB,
     ENCODING,
 )
@@ -16,9 +15,9 @@ from core.config.settings import (
 # =========================
 
 RECREATE_SCHEMA = True
+ERP_SCHEMA = os.path.join(ROOT_DIR, "data/sqlite/erp_schema.sql")
 
-TABLE_DIR = os.path.join(BASE_DIR, "untracked/sqlite/tabelas_csv")
-
+TABLE_DIR = os.path.join(ROOT_DIR, "data/sqlite/tabelas_csv")
 
 # tabelas que terão limpeza texto
 TABLES_TO_CLEAN = [

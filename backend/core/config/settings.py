@@ -12,14 +12,11 @@ def env_path(key: str) -> Path:
     return Path(value)
 
 
-BASE_DIR = env_path("BASE_DIR")
-ERP_MDB = BASE_DIR / env_path("ERP_MDB")
-ERP_SCHEMA = BASE_DIR / env_path("ERP_SCHEMA")
-ERP_SQLITE_DB = BASE_DIR / env_path("ERP_SQLITE_DB")
-SQLITE_DB = BASE_DIR / env_path("SQLITE_DB")
-SQLITE_SCHEMA = BASE_DIR / env_path("SQLITE_SCHEMA")
-OUTPUT_DIR = BASE_DIR / env_path("OUTPUT_DIR")
-INPUT_DIR = BASE_DIR / env_path("INPUT_DIR")
+ERP_MDB = ROOT_DIR / env_path("ERP_MDB")
+ERP_SQLITE_DB = ROOT_DIR / env_path("ERP_SQLITE_DB")
+SQLITE_DB = ROOT_DIR / env_path("SQLITE_DB")
+OUTPUT_DIR = ROOT_DIR / env_path("OUTPUT_DIR")
+INPUT_DIR = ROOT_DIR / env_path("INPUT_DIR")
 
 ENCODING = os.getenv("ENCODING")
 

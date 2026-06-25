@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: reportgen-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data  # Monta a pasta de bancos de dados
+    env_file:
+      - ./backend/.env    # Aponta para o .env específico do backend
+    restart: unless-stopped
+
+  frontend:
+    build: 
+      context: ./frontend
+    container_name: reportgen-frontend
+    ports:
+      - "80:80"           # O Tailscale vai bater aqui
+    restart: unless-stopped
+    depends_on:
+      - backend

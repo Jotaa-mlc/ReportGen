@@ -41,7 +41,7 @@ def load_cod_barras(input_file_name):
     return pd.read_csv(
         input_file,
         encoding=ENCODING
-    )['codigo_barra'].tolist()
+    )['cod_barra'].tolist()
 
 # =========================
 # DATAS
