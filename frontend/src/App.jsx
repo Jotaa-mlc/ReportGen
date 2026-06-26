@@ -3,6 +3,7 @@ import Footer from './components/Footer.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 import Reports from './pages/Reports.jsx';
+import ReportsDashboard from './pages/reports/Dashboard.jsx';
 import Compras from './pages/reports/Compras.jsx';
 import FamiliasProdutos from './pages/reports/FamiliasProdutos.jsx';
 import FornecedorProdutos from './pages/reports/FornecedorProdutos.jsx';
@@ -20,8 +21,10 @@ function App() {
       <BrowserRouter>
         <main className="main-content">
           <Routes>
-            <Route path="/reports" element={<Reports />}>
+            <Route path="/" element={<Reports />}>
+              <Route index element={<ReportsDashboard />} />
               <Route path="compras" element={<Compras />} />
+              <Route path="compras/:id" element={<Compras />} />
               <Route path="familias-produtos" element={<FamiliasProdutos />} />
               <Route path="fornecedor-produtos" element={<FornecedorProdutos />} />
               <Route path="fornecedor-familias" element={<FornecedorFamilias />} />
