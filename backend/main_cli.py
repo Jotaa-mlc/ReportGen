@@ -4,7 +4,7 @@ from report.compras.main import (
     main as compras_report
 )
 
-from import_from_MDB import main as import_from_MDB
+from core.db.import_from_MDB import main as import_from_MDB
 
 REPORTS = {
     "updt_db": import_from_MDB,

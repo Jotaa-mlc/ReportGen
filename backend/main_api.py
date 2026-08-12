@@ -38,7 +38,7 @@ def get_familias_preview():
         
         # Converte o DataFrame para uma lista de dicionários (JSON amigável)
         # Limitamos a 100 linhas para o preview ficar leve na tela
-        preview_data = final_df.head(100).to_dict(orient="records")
+        preview_data = {} #final_df.head(100).to_dict(orient="records")
         return {"data": preview_data}
     finally:
         conn.close()

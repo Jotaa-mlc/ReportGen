@@ -15,53 +15,33 @@ def format_report(worksheet: Worksheet, formats: dict, df: DataFrame, context: d
     last_mes_col = column_map[context["month_columns"][-1]]
     estoque_col = column_map["estoque"]
     variacao_orcamento_col = column_map["variacao_orcamento"]
+    qte_orcamento_col = column_map["qte_orcamento"]
+    input_sugestao_col = column_map["input_sugestao"]
 
-    for i in range(1, len(df) + 1):
+    # zero vendas
+    worksheet.conditional_format(
+        1,
+        first_mes_col,
+        len(df),
+        last_mes_col,
+        {
+            "type": "formula",
+            "criteria": f'=SUM(${col(first_mes_col)}2:${col(last_mes_col)}2)=0',
+            "format": formats["zero_vendas"]
+        }
+    )
 
-        # =====================
-        # VALORES DA LINHA
-        # =====================
-
-        valores = df.iloc[
-            i - 1,
-            first_mes_col:last_mes_col + 1
-        ]
-
-        todos_zero = (valores == 0).all()
-
-        # =====================
-        # LINHA SEM VENDAS
-        # =====================
-
-        if todos_zero:
-
-            worksheet.conditional_format(
-                i,
-                first_mes_col,
-                i,
-                last_mes_col,
-                {
-                    "type": "no_blanks",
-                    "format": formats["zero_vendas"]
-                }
-            )
-
-        # =====================
-        # LINHA COM VENDAS
-        # =====================
-
-        else:
-
-            worksheet.conditional_format(
-                i,
-                first_mes_col,
-                i,
-                last_mes_col,
-                {
-                    "type": "data_bar"
-                }
-            )
-
+    # vendas
+    worksheet.conditional_format(
+        1,
+        first_mes_col,
+        len(df),
+        last_mes_col,
+        {
+            "type": "data_bar"
+        }
+    )
+    
     # estoque crítico
     worksheet.conditional_format(
         1,
@@ -77,7 +57,6 @@ def format_report(worksheet: Worksheet, formats: dict, df: DataFrame, context: d
     )
 
     # variação orçamento
-
     worksheet.conditional_format(
         1,
         variacao_orcamento_col,
@@ -88,6 +67,19 @@ def format_report(worksheet: Worksheet, formats: dict, df: DataFrame, context: d
             'min_color': "#63BE7B",
             'mid_color': "#FFEB84",
             'max_color': "#F8696B"
+        }
+    )
+    
+    # qte orçamento diferente de qte pedida
+    worksheet.conditional_format(
+        1,
+        input_sugestao_col,
+        len(df),
+        input_sugestao_col,
+        {
+            "type": "formula",
+            "criteria": f'=${col(input_sugestao_col)}2<>{col(qte_orcamento_col)}2',
+            "format": formats["orcamento_diferente"]
         }
     )
     

@@ -40,6 +40,7 @@ def load_cod_barras(input_file_name):
 
     return pd.read_csv(
         input_file,
+        delimiter=';',
         encoding=ENCODING
     )['cod_barra'].tolist()
 
@@ -49,15 +50,16 @@ def load_cod_barras(input_file_name):
 
 def build_period():
 
-    today = datetime.datetime.now()
+    # today = datetime.datetime.now()
 
-    data_fim = today.strftime('%Y-%m')
+    # data_fim = today.strftime('%Y-%m')
 
-    data_inicio = (
-        today
-        - pd.DateOffset(months=MESES_VENDAS)
-    ).strftime('%Y-%m')
-
+    # data_inicio = (
+    #     today
+    #     - pd.DateOffset(months=MESES_VENDAS)
+    # ).strftime('%Y-%m')
+    data_inicio = '2025-07'
+    data_fim = '2026-08'
     return data_inicio, data_fim
 
 # =========================
@@ -76,7 +78,9 @@ def main(input_file_name):
         conn,
         cod_barras
     )
-
+    
+    produtos_df['data_ultima_compra'] = pd.to_datetime(produtos_df['data_ultima_compra'], errors='coerce').dt.date
+    
     vendas_df = load_vendas(
         conn,
         cod_barras,

@@ -48,6 +48,20 @@ BASE_COLUMNS = {
         "type": "format_only",
         "format": "decimal",
         "width": 10
+    },
+    
+    "data_ultima_compra": {
+        "title": "Data Última Compra",
+        "type": "format_only",
+        "format": "date",
+        "width": 10
+    },
+    
+    "ultimo_fornecedor": {
+        "title": "Último Fornecedor",
+        "type": "format_only",
+        "format": "text",
+        "width": 30
     }
 }
 
@@ -108,6 +122,15 @@ EXTRA_COLUMNS = {
         "formula": formulas.qte_orcamento_formula,
         "value": 0
     },
+    
+    "vlr_orcamento": {
+            "title": "Vlr Orçamento",
+            "type": "formula",
+            "format": "decimal",
+            "width": 14,
+            "formula": formulas.vlr_orcamento_formula,
+            "value": 0
+        },
 
     "variacao_orcamento": {
         "title": "~Orçamento",
@@ -185,5 +208,10 @@ CUSTOM_FORMATS = {
     
     "estoque_critico": {
         "bg_color": "#FFC7CE"
+    },
+    
+    "orcamento_diferente": {
+        "bg_color": "#FFC7CE"
     }
+
 }

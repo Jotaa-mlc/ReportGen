@@ -156,6 +156,25 @@ def qte_orcamento_formula(ctx):
     )
 
 # =====================
+# VLR ORÇAMENTO
+# =====================
+
+def vlr_orcamento_formula(ctx):
+
+    row = ctx["excel_row"]
+
+    codigo_col = ctx["column_map"]["cod_barra"]
+
+    return (
+        f'=IFERROR('
+        f'VLOOKUP('
+        f'{col(codigo_col)}{row},'
+        f'\'Orçamento\'!A:C,'
+        f'3,0'
+        f'),"")'
+    )
+
+# =====================
 # VAR ORÇAMENTO
 # =====================
 

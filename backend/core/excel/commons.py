@@ -101,14 +101,6 @@ def write_columns_from_config(
             formats["header"]
         )
 
-        if "width" in config:
-
-            worksheet.set_column(
-                col_num,
-                col_num,
-                config["width"]
-            )
-
     # ==================================================
     # APPLY COLUMN FORMATS
     # ==================================================
@@ -141,10 +133,6 @@ def write_columns_from_config(
 
             col_type = config.get("type")
 
-            fmt = formats.get(
-                config.get("format")
-            )
-
             # ==========================================
             # FORMULA
             # ==========================================
@@ -159,7 +147,6 @@ def write_columns_from_config(
                     row,
                     col_num,
                     formula,
-                    fmt,
                     config.get("value")
                 )
 
@@ -191,6 +178,5 @@ def write_columns_from_config(
                 worksheet.write(
                     row,
                     col_num,
-                    value,
-                    fmt
+                    value
                 )

@@ -44,7 +44,7 @@ def export_report(final_df: DataFrame, output_file: Path) -> None:
     )
     
     workbook = writer.book
-    formats = build_formats(workbook, CUSTOM_FORMATS)
+    formats = build_formats(workbook, CUSTOM_FORMATS) # type: ignore
     report_worksheet = writer.sheets['Relatório']
     ctx=build_report_columns(BASE_COLUMNS, final_df, EXTRA_COLUMNS)
     write_columns_from_config(
@@ -61,7 +61,7 @@ def export_report(final_df: DataFrame, output_file: Path) -> None:
         context=ctx
     )
     
-    orcamento_worksheet = workbook.add_worksheet("Orçamento")
+    orcamento_worksheet = workbook.add_worksheet("Orçamento") # type: ignore
     write_columns_from_config(
         worksheet=orcamento_worksheet,
         dataframe=DataFrame(),  # Passar um DataFrame vazio, pois os dados serão preenchidos manualmente

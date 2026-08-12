@@ -1,5 +1,29 @@
 import pandas as pd
-from core.db.queries import PRODUTOS_DCCVE_QUERY
+
+PRODUTOS_DCCVE_QUERY = """
+SELECT
+    p.Cod_barra           AS "cod_barra",
+    p.Descricao           AS "descricao",
+    p.Vlr_ultima_compra   AS "compra",
+    p.Vlr_ultimo_custo    AS "custo",
+    p.Vlr_normal          AS "venda",
+    p.Estoque_atual       AS "estoque",
+    MAX(ep.Data_entrada)  AS "data_ultima_compra",
+    c.Nome                AS "ultimo_fornecedor"
+
+FROM Produtos p
+JOIN Entradas_produtos_itens epi ON p.Cod_barra = epi.Cod_barra 
+JOIN Entradas_produtos ep ON epi.Seq_entrada = ep.Seq_entrada 
+JOIN Clientes c ON ep.Cpf_cnpj = c.Cpf_cnpj 
+
+WHERE 
+    p.Cod_barra IN ({placeholders}) 
+    AND p.Sit_produto = 'Ativo' 
+    AND ep.Sit_lancamento = 1
+
+GROUP BY p.Cod_barra
+ORDER BY p.Descricao
+"""
 
 VENDAS_QUERY = """
 SELECT
@@ -20,6 +44,10 @@ WHERE p.Data_pedido >= ?
   AND p.Documentos IN (
         'Pedido',
         'Remessa p/Vendas'
+    )
+
+  AND p.Sit_pedido IN (
+        'Fechado'
     )
 
   AND cod_barra IN ({placeholders})

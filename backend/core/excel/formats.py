@@ -24,6 +24,14 @@ FORMATS = {
     
     "decimal": {
         "num_format": '0.00'
+    },
+    
+    "date": {
+        "num_format": 'dd/mm/yyyy'
+    },
+    
+    "text": {
+        "num_format": '@'
     }
 }
 
