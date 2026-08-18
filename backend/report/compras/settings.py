@@ -73,9 +73,9 @@ EXTRA_COLUMNS = {
         "width": 18,
         "formula": formulas.sparkline_config,
     },
-
+    
     "media_vendas": {
-        "title": "Média Ult Ano/Mes",
+        "title": "Média Peri./Mes",
         "type": "formula",
         "format": "decimal",
         "width": 14,
@@ -151,6 +151,15 @@ EXTRA_COLUMNS = {
         "default": MESES_SUGESTAO
     },
 
+    "vlr_esperado_orcamento": {
+        "title": "Vlr Esperado Orçamento",
+        "type": "formula",
+        "format": "decimal",
+        "width": 14,
+        "formula": formulas.vlr_esperado_orcamento_formula,
+        "value": 0
+    },
+    
     "input_label": {
         "title": "",
         "type": "default_value",

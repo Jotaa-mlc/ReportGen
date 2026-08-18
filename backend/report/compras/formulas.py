@@ -173,6 +173,27 @@ def vlr_orcamento_formula(ctx):
         f'3,0'
         f'),"")'
     )
+    
+# =====================
+# VLR ESPERADO ORÇAMENTO
+# =====================
+
+def vlr_esperado_orcamento_formula(ctx):
+    
+    row = ctx["excel_row"]
+
+    custo_col = ctx["column_map"]["custo"]
+    vlr_orcamento_col = ctx["column_map"]["vlr_orcamento"]
+    input_sugestao_col = ctx["column_map"]["input_sugestao"]
+
+    return (
+        f'=IFERROR('
+        f'IF('
+        f'{col(vlr_orcamento_col)}{row}<>"",'
+        f'{col(vlr_orcamento_col)}{row} * {col(input_sugestao_col)}{row},'
+        f'{col(custo_col)}{row} * {col(input_sugestao_col)}{row}'
+        f'),"")'
+    )
 
 # =====================
 # VAR ORÇAMENTO

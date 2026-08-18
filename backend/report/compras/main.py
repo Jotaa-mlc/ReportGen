@@ -1,4 +1,4 @@
-import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 import pandas as pd
 
@@ -50,17 +50,13 @@ def load_cod_barras(input_file_name):
 
 def build_period():
 
-    # today = datetime.datetime.now()
-
-    # data_fim = today.strftime('%Y-%m')
+    data_inicio = date.today() - timedelta(days=30*MESES_VENDAS)
 
     # data_inicio = (
     #     today
     #     - pd.DateOffset(months=MESES_VENDAS)
     # ).strftime('%Y-%m')
-    data_inicio = '2025-07'
-    data_fim = '2026-08'
-    return data_inicio, data_fim
+    return data_inicio.strftime('%Y-%m')
 
 # =========================
 # MAIN
@@ -70,7 +66,7 @@ def main(input_file_name):
     
     cod_barras = load_cod_barras(input_file_name)
 
-    data_inicio, data_fim = build_period()
+    data_inicio = build_period()
 
     conn = get_connection(ERP_SQLITE_DB)
 
@@ -79,13 +75,12 @@ def main(input_file_name):
         cod_barras
     )
     
-    produtos_df['data_ultima_compra'] = pd.to_datetime(produtos_df['data_ultima_compra'], errors='coerce').dt.date
+    #produtos_df['data_ultima_compra'] = pd.to_datetime(produtos_df['data_ultima_compra'], errors='coerce').dt.date
     
     vendas_df = load_vendas(
         conn,
         cod_barras,
-        data_inicio,
-        data_fim
+        data_inicio
     )
 
     pivot_df = build_vendas_pivot(
@@ -96,8 +91,9 @@ def main(input_file_name):
         produtos_df,
         pivot_df
     )
+    
 
-    timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%Hh%Mm%Ss')
+    timestamp = datetime.now().strftime('%Y-%m-%d_%Hh%Mm%Ss')
     output_filename = f"{timestamp} {XLSX_OUTPUT_FILE}"
     export_report(final_df, OUTPUT_DIR / output_filename)
 

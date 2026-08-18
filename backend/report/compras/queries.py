@@ -39,8 +39,6 @@ JOIN Pedidos p
     ON pi.Num_pedido = p.Num_pedido
 
 WHERE p.Data_pedido >= ?
-  AND p.Data_pedido < ?
-
   AND p.Documentos IN (
         'Pedido',
         'Remessa p/Vendas'
@@ -82,8 +80,7 @@ def load_produtos(conn, cod_barras):
 def load_vendas(
     conn,
     cod_barras,
-    data_inicio,
-    data_fim
+    data_inicio
 ):
 
     placeholders = ','.join(
@@ -96,7 +93,7 @@ def load_vendas(
     )
 
     params = (
-        [data_inicio, data_fim]
+        [data_inicio]
         + cod_barras
     )
 
