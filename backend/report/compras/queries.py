@@ -10,17 +10,14 @@ SELECT
     p.Estoque_atual       AS "estoque",
     MAX(ep.Data_entrada)  AS "data_ultima_compra",
     c.Nome                AS "ultimo_fornecedor"
-
 FROM Produtos p
-JOIN Entradas_produtos_itens epi ON p.Cod_barra = epi.Cod_barra 
-JOIN Entradas_produtos ep ON epi.Seq_entrada = ep.Seq_entrada 
-JOIN Clientes c ON ep.Cpf_cnpj = c.Cpf_cnpj 
-
+LEFT JOIN Entradas_produtos_itens epi ON p.Cod_barra = epi.Cod_barra 
+LEFT JOIN Entradas_produtos ep ON epi.Seq_entrada = ep.Seq_entrada 
+LEFT JOIN Clientes c ON ep.Cpf_cnpj = c.Cpf_cnpj 
 WHERE 
-    p.Cod_barra IN ({placeholders}) 
-    AND p.Sit_produto = 'Ativo' 
-    AND ep.Sit_lancamento = 1
-
+    p.Cod_barra IN ({placeholders})
+    AND p.Sit_produto = 'Ativo'
+    AND (ep.Sit_lancamento = 1 OR ep.Sit_lancamento IS NULL)
 GROUP BY p.Cod_barra
 ORDER BY p.Descricao
 """
@@ -75,8 +72,6 @@ def load_produtos(conn, cod_barras):
         params=cod_barras
     )
 
-
-
 def load_vendas(
     conn,
     cod_barras,
@@ -89,7 +84,6 @@ def load_vendas(
 
     query = VENDAS_QUERY.format(
         placeholders=placeholders
-        
     )
 
     params = (

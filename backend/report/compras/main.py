@@ -75,8 +75,6 @@ def main(input_file_name):
         cod_barras
     )
     
-    #produtos_df['data_ultima_compra'] = pd.to_datetime(produtos_df['data_ultima_compra'], errors='coerce').dt.date
-    
     vendas_df = load_vendas(
         conn,
         cod_barras,
